@@ -1,0 +1,32 @@
+<?php get_header(); ?>
+<main class="eba-main eba-inner">
+	<div class="eba-wrap eba-columns">
+		<div class="eba-content">
+			<?php get_template_part( 'template-parts/breadcrumbs' ); ?>
+			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+				<article <?php post_class( 'eba-page' ); ?>>
+					<h1 class="eba-page-title"><?php the_title(); ?></h1>
+					<div class="eba-entry">
+						<?php 
+						$content = trim( get_the_content() );
+						if ( empty( $content ) ) : 
+						?>
+							<div class="eba-coming-soon-container" style="text-align: center; padding: 60px 20px; background: #fafafa; border: 1px dashed #ccc; border-radius: 8px; margin: 20px 0;">
+								<div class="eba-coming-soon-icon" style="font-size: 48px; color: var(--eba-blue); margin-bottom: 20px;">
+									<i class="fa fa-clock-o"></i>
+								</div>
+								<h2 style="font-size: 24px; color: #333; margin-bottom: 10px;">Coming Soon</h2>
+								<p style="color: #666; font-size: 14px; max-width: 400px; margin: 0 auto 20px;">We are currently working hard on this page to bring you the best content. Please check back later!</p>
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="eba-coming-soon-btn" style="display: inline-block; background: var(--eba-blue); color: #fff; padding: 10px 20px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 13px; transition: background 0.3s;">Go Back Home</a>
+							</div>
+						<?php else : ?>
+							<?php the_content(); ?>
+						<?php endif; ?>
+					</div>
+				</article>
+			<?php endwhile; endif; ?>
+		</div>
+		<?php get_template_part( 'template-parts/sidebar' ); ?>
+	</div>
+</main>
+<?php get_footer(); ?>
